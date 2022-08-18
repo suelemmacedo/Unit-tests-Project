@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 const circle = require('../src/circle');
-
+const assert = require('assert'); /* reference: https://www.w3schools.com/nodejs/met_assert_strictequal.asp */
 /*
   A função `circle` recebe o raio de um círculo e retorna um objeto contendo suas informações: Raio, Área e Circunferência.
   Se não for especificado um raio, a função retorna `undefined`.
@@ -23,14 +23,22 @@ const circle = require('../src/circle');
 
 describe('4 - Implemente os casos de teste para a função `circle`', () => {
   it('Verifica se ao receber um raio, a função `circle` retorna um objeto contendo os valores esperados', () => {
-    fail('Teste vazio!');
-    // ESCREVA SEUS TESTES ABAIXO:
     // Teste se circle retorna undefined, caso o parâmetro passado não seja um número.
+    assert.strictEqual(circle('nome'), undefined);
     // Teste se circle retorna um objeto.
+    assert.strictEqual(typeof circle(3), 'object');
     // Teste se o objeto retornado possui 3 propriedades.
+    assert.strictEqual(Object.keys(circle(5)).length, 3);
     // Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
+    assert.strictEqual(circle(), undefined);
     // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à circunferência correta para um círculo de raio 2.
+    expect(circle(2).circumference).toBeCloseTo(12.56);
     // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à área correta para um círculo de raio 3.
+    expect(circle(3).area).toBeCloseTo(28.26);
     // Teste se a função retorna, em um objeto, os dados corretos de um círculo de raio 3.
+    /* expect(circle(3).radius).toBeCloseTo(3);
+    expect(circle(3).area).toBeCloseTo(28.26);
+    expect(circle(3).circumference).toBeCloseTo(18.84); */
+    assert.deepStrictEqual(circle(3), { radius: 3, area: 28.259999999999998, circumference: 18.84 }); // apenas com o uso do deepStrictEqual consegui deixar o valor em seu resultado real, retomando a linha que segui no início. https://www.w3schools.com/nodejs/met_assert_deepstrictequal.asp
   });
 });
